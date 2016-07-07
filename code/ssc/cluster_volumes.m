@@ -1,6 +1,7 @@
-function dataset = clusterVolumes(s)
+function datasets = cluster_volumes(s)
 
-
+% datasets will store the organized dataset for each volume
+datasets = {};
     
     for vol = 1:10
         
@@ -9,11 +10,11 @@ function dataset = clusterVolumes(s)
         % rel_dF = s.timeSeriesArrayHash.value{volume+1}.valueMatrix;
         trial_ids = unique(trials);
         
-        dataset = createDatasetForVolume(s,vol);
+        datasets{vol} = createDatasetForVolume(s,vol);
         
         
         % calculating the distance
-        D = pdist(dataset','euclidean');
+        D = pdist(datasets{vol}','euclidean');
         [Y,e] = cmdscale(D);
 
         % calculate the number of clusters
@@ -56,7 +57,7 @@ function dataset = clusterVolumes(s)
             text(Y(ii,1)+2, Y(ii,2)+4,textLabels(ii),'FontSize',8) 
         end
         
-        saveas(gcf,sprintf('clustering_vol%d.png',vol))
+        saveas(gcf,sprintf('results_clustering/clustering_vol%d.png',vol))
         
     end
 end

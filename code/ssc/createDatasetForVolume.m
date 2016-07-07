@@ -2,8 +2,8 @@ function dataset = createDatasetForVolume(s, volume, filename)
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % 
-    % 
-    % 
+    % Creates a dataset of the form (nofCells x nofTimes) x nofTrials.
+    %      
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     
@@ -24,7 +24,7 @@ function dataset = createDatasetForVolume(s, volume, filename)
     
         % interpolate at a fixed time grid
         res{i} = interp1(rel_times,rel_dF(:,trials == trial_ids(i))',0:0.01:12,'linear',0);
-    
+        
         imagesc(res{i}')
         %plot(rel_times,rel_dF(:,trials == trials(i))')
         %xlim([0 12])
@@ -39,7 +39,12 @@ function dataset = createDatasetForVolume(s, volume, filename)
     a = (reshape(cell2mat(res),nofCells,timePoints,nofTrials));
     b = permute(a,[2,1,3]);
     
+    
     dataset = reshape(b,nofCells*timePoints,nofTrials);
+    
+    disp(nofCells)
+    disp(timePoints)
+    disp(nofTrials)
 
     % drop NAs
     idx_NAs = sum(isnan(dataset),1)>0;

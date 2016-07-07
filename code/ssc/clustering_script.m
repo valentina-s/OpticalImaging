@@ -8,7 +8,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
 % read the data
-load an197522_2013_03_08_session.mat
+data_path = '../../SvobodaLabSSCData/CRCNS/'
+load(fullfile(data_path,'an197522_2013_03_08_session.mat'))
 
 % select volume to process
 volume = 3;
