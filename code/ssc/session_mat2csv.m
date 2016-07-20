@@ -16,6 +16,10 @@ csvwrite(sprintf('%sactivity.csv',output_path),[times;activity])
 % extracting the fluorescent data
 for i=2:10
     rel_dF = s.timeSeriesArrayHash.value{i}.valueMatrix;
-    csvwrite(sprintf('%srelDf_%d.csv',output_path,i-1),[s.timeSeriesArrayHash.value{i}.time;rel_dF])
+    trials = s.timeSeriesArrayHash.value{i}.trial;
+    csvwrite(sprintf('%srelDf_%d.csv',output_path,i-1),[s.timeSeriesArrayHash.value{i}.time;trials; rel_dF])
 end
+% first row times
+% second row trials
+
 

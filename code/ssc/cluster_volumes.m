@@ -2,7 +2,9 @@ function datasets = cluster_volumes(s)
 
 % datasets will store the organized dataset for each volume
 datasets = {};
-    
+% store the text labels to the an... folder
+data_path = '../../data/SvobodaLabSSCData/CRCNS/';
+output_path = sprintf('%san197522_2013_03_08_session/',data_path);
     for vol = 1:10
         
         trials = s.timeSeriesArrayHash.value{vol+1}.trial;
@@ -58,6 +60,10 @@ datasets = {};
         end
         
         saveas(gcf,sprintf('results_clustering/clustering_vol%d.png',vol))
-        
+
+        fid = fopen(sprintf('%strialTypes%d.csv',output_path, vol), 'w');
+        fprintf(fid, '%s,', textLabels{:}) ;
+        fclose(fid) ;
+       
     end
 end
